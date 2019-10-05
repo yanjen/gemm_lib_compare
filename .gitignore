@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
+
+# Sublime sftp file
+sftp-config.json
+
+# build directory
+build/
