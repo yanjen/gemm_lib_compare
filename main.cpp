@@ -1,8 +1,6 @@
 #include <sys/time.h>
 
-#include <cstdint>
 #include <iostream>
-#include <random>
 
 #include <reference/gemm.hpp>
 

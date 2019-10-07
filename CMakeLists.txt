@@ -14,3 +14,6 @@ add_subdirectory(reference)
 add_executable(gemm main.cpp)
 
 target_link_libraries(gemm GLC_LIB)
+
+include (CTest)
+add_subdirectory(test)
