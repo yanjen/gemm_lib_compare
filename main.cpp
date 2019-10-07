@@ -1,8 +1,6 @@
 #include <iostream>
 
-// #include "reference/gemm.hpp"
-
-void gemm_reference(double *A, double *B, double *C);
+#include <reference/gemm.hpp>
 
 int main(int argc, char const *argv[]) {
   double A[3], B[3], C[3];
