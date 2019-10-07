@@ -1,6 +1,8 @@
 #ifndef GEMM_HPP_
 #define GEMM_HPP_
 
-void gemm_reference(double *A, double *B, double *C);
+void gemm_reference(char transa, char transb, int m, int n, int k, double alpha,
+                    double *A, int lda, double *B, int ldb, double beta,
+                    double *C, int ldc);
 
-#endif // GEMM_HPP_
+#endif  // GEMM_HPP_

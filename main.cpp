@@ -1,11 +1,31 @@
+#include <sys/time.h>
+
+#include <cstdint>
 #include <iostream>
+#include <random>
 
 #include <reference/gemm.hpp>
 
-int main(int argc, char const *argv[]) {
-  double A[3], B[3], C[3];
+int main(int argc, char const *argv[])
+{
+    int matrix_size = 1000;
+    struct timeval start_time, end_time;
 
-  gemm_reference(A, B, C);
+    double *A, *B, *C;
+    A = new double[matrix_size * matrix_size]();
+    B = new double[matrix_size * matrix_size]();
+    C = new double[matrix_size * matrix_size]();
 
-  return 0;
+    gettimeofday(&start_time, NULL);
+    gemm_reference('N', 'N', matrix_size, matrix_size, matrix_size, 1.0, A,
+                   matrix_size, B, matrix_size, 0.0, C, matrix_size);
+    gettimeofday(&end_time, NULL);
+
+    std::cout << "Elapse time for Matrix-Matrix multiplication is "
+              << ((end_time.tv_sec - start_time.tv_sec) * 1000000u +
+                  end_time.tv_usec - start_time.tv_usec) /
+                     1.e6
+              << std::endl;
+
+    return 0;
 }
