@@ -1,3 +1,4 @@
+#include <mkl.h>
 #include <sys/time.h>
 
 #include <iostream>
@@ -17,6 +18,17 @@ int main(int argc, char const *argv[])
     gettimeofday(&start_time, NULL);
     gemm_reference('N', 'N', matrix_size, matrix_size, matrix_size, 1.0, A,
                    matrix_size, B, matrix_size, 0.0, C, matrix_size);
+    gettimeofday(&end_time, NULL);
+
+    std::cout << "Elapse time for Matrix-Matrix multiplication is "
+              << ((end_time.tv_sec - start_time.tv_sec) * 1000000u +
+                  end_time.tv_usec - start_time.tv_usec) /
+                     1.e6
+              << std::endl;
+
+    gettimeofday(&start_time, NULL);
+    cblas_dgemm('N', 'N', matrix_size, matrix_size, matrix_size, 1.0, A,
+                matrix_size, B, matrix_size, 0.0, C, matrix_size);
     gettimeofday(&end_time, NULL);
 
     std::cout << "Elapse time for Matrix-Matrix multiplication is "
