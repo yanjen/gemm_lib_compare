@@ -27,8 +27,9 @@ int main(int argc, char const *argv[])
               << std::endl;
 
     gettimeofday(&start_time, NULL);
-    cblas_dgemm('N', 'N', matrix_size, matrix_size, matrix_size, 1.0, A,
-                matrix_size, B, matrix_size, 0.0, C, matrix_size);
+    cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, matrix_size,
+                matrix_size, matrix_size, 1.0, A, matrix_size, B, matrix_size,
+                0.0, C, matrix_size);
     gettimeofday(&end_time, NULL);
 
     std::cout << "Elapse time for Matrix-Matrix multiplication is "

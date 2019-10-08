@@ -8,7 +8,7 @@ set (GLC_VERSION_PATCH 0)
 include_directories ("${PROJECT_SOURCE_DIR}/include")
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mkl")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mkl=parallel")
 
 add_subdirectory(reference)
 
