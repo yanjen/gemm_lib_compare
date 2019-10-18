@@ -57,12 +57,12 @@ TEST(GEMM, MultiplyIdentityCorrectly)
 TEST(GEMM, MultiplyCorrectly)
 {
     // clang-format off
-	double A[9] = { 1, 2, 3,
-				    4, 5, 6,
-				    7, 8, 9};
-	double B[9] = {-1, 0, 1,
-				   -3, 2,-1,
-				    3, 4, 5};
+	double A[9] = { 1, 4, 7,
+				    2, 5, 8,
+				    3, 6, 9};
+    double B[9] = {-1,-3, 3,
+                    0, 2, 4,
+                    1,-1, 5};
     // clang-format on
     double C[9]{0};
     int N = 3;
@@ -70,25 +70,25 @@ TEST(GEMM, MultiplyCorrectly)
     gemm_reference('N', 'N', N, N, N, 1.0, A, N, B, N, 0.0, C, N);
 
     ASSERT_EQ(C[0], 6);
-    ASSERT_EQ(C[1], 6);
-    ASSERT_EQ(C[2], 6);
-    ASSERT_EQ(C[3], -2);
+    ASSERT_EQ(C[1], -2);
+    ASSERT_EQ(C[2], 54);
+    ASSERT_EQ(C[3], 6);
     ASSERT_EQ(C[4], -4);
-    ASSERT_EQ(C[5], -6);
-    ASSERT_EQ(C[6], 54);
-    ASSERT_EQ(C[7], 66);
+    ASSERT_EQ(C[5], 66);
+    ASSERT_EQ(C[6], 6);
+    ASSERT_EQ(C[7], -6);
     ASSERT_EQ(C[8], 78);
 }
 
 TEST(GEMM, MultiplyCorrectly2)
 {
     // clang-format off
-	double A[9] = { 1, 2, 3,
-				    4, 5, 6,
-				    7, 8, 9};
-	double B[9] = {-1, 0, 1,
-				   -3, 2,-1,
-				    3, 4, 5};
+	double A[9] = { 1, 4, 7,
+				    2, 5, 8,
+				    3, 6, 9};
+    double B[9] = {-1,-3, 3,
+                    0, 2, 4,
+                    1,-1, 5};
 	double C[9] = { 1, 1, 1,
 				    1, 1, 1,
 				    1, 1, 1};
@@ -100,13 +100,13 @@ TEST(GEMM, MultiplyCorrectly2)
     gemm_reference('N', 'N', N, N, N, alpha, A, N, B, N, beta, C, N);
 
     ASSERT_EQ(C[0], 11);
-    ASSERT_EQ(C[1], 11);
-    ASSERT_EQ(C[2], 11);
-    ASSERT_EQ(C[3], -5);
+    ASSERT_EQ(C[1], -5);
+    ASSERT_EQ(C[2], 107);
+    ASSERT_EQ(C[3], 11);
     ASSERT_EQ(C[4], -9);
-    ASSERT_EQ(C[5], -13);
-    ASSERT_EQ(C[6], 107);
-    ASSERT_EQ(C[7], 131);
+    ASSERT_EQ(C[5], 131);
+    ASSERT_EQ(C[6], 11);
+    ASSERT_EQ(C[7], -13);
     ASSERT_EQ(C[8], 155);
 }
 
