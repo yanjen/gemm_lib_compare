@@ -1,13 +1,13 @@
-#include <mkl.h>
+#include <cblas.h>
 #include <sys/time.h>
 
 #include <iostream>
 
-#include <reference/gemm.hpp>
+#include <gemm.hpp>
 
 int main(int argc, char const *argv[])
 {
-    int matrix_size = 1000;
+    int matrix_size = 2048;
     struct timeval start_time, end_time;
 
     double *A, *B, *C;
@@ -16,8 +16,8 @@ int main(int argc, char const *argv[])
     C = new double[matrix_size * matrix_size]();
 
     gettimeofday(&start_time, NULL);
-    gemm_reference('N', 'N', matrix_size, matrix_size, matrix_size, 1.0, A,
-                   matrix_size, B, matrix_size, 0.0, C, matrix_size);
+    gemm_reference(matrix_size, matrix_size, matrix_size, 1.0, A, matrix_size,
+                   B, matrix_size, 0.0, C, matrix_size);
     gettimeofday(&end_time, NULL);
 
     std::cout << "Elapse time for Matrix-Matrix multiplication is "

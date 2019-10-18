@@ -5,16 +5,20 @@ set (GLC_VERSION_MAJOR 0)
 set (GLC_VERSION_MINOR 0)
 set (GLC_VERSION_PATCH 0)
 
+set(Openblas_DIR "${Openblas_DIR}" CACHE PATH "Path to OpenBLAS.")
+
 include_directories ("${PROJECT_SOURCE_DIR}/include")
+include_directories ("${Openblas_DIR}/include")
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mkl=parallel")
 
 add_subdirectory(reference)
 
+link_directories("${Openblas_DIR}/lib")
+
 add_executable(gemm main.cpp)
 
-target_link_libraries(gemm GLC_LIB)
+target_link_libraries(gemm GLC_LIB openblas)
 
 include (CTest)
 add_subdirectory(test)
