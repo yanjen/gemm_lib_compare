@@ -4,7 +4,7 @@
 
 #include <gemm.hpp>
 
-TEST(GEMMReference, CanMultiply)
+TEST(GEMMOpenACC, CanMultiply)
 {
     double A[9], B[9], C[9];
     int N = 3;
@@ -12,7 +12,7 @@ TEST(GEMMReference, CanMultiply)
     gemm_OpenACC(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
 }
 
-TEST(GEMMReference, CanMultiplyWithValues)
+TEST(GEMMOpenACC, CanMultiplyWithValues)
 {
     double A[9], B[9], C[9]{0};
     int N = 3;
@@ -27,7 +27,7 @@ TEST(GEMMReference, CanMultiplyWithValues)
     gemm_OpenACC(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
 }
 
-TEST(GEMMReference, MultiplyIdentityCorrectly)
+TEST(GEMMOpenACC, MultiplyIdentityCorrectly)
 {
     double A[9], B[9]{0}, C[9]{0};
     int N = 3;
@@ -54,7 +54,7 @@ TEST(GEMMReference, MultiplyIdentityCorrectly)
     ASSERT_EQ(C[8], A[8]);
 }
 
-TEST(GEMMReference, MultiplySameAsReference)
+TEST(GEMMOpenACC, MultiplySameAsReference)
 {
     // clang-format off
 	double A[9] = { 1, 4, 7,
@@ -82,7 +82,7 @@ TEST(GEMMReference, MultiplySameAsReference)
     ASSERT_EQ(D[8], C[8]);
 }
 
-TEST(GEMMReference, MultiplySameAsReference2)
+TEST(GEMMOpenACC, MultiplySameAsReference2)
 {
     // clang-format off
 	double A[9] = { 1, 4, 7,
@@ -116,7 +116,7 @@ TEST(GEMMReference, MultiplySameAsReference2)
     ASSERT_EQ(D[8], C[8]);
 }
 
-TEST(GEMMReference, MultiplyNonSquareSameAsReference)
+TEST(GEMMOpenACC, MultiplyNonSquareSameAsReference)
 {
     // clang-format off
 	double A[6] = {1,4,       // A = |1 4|
@@ -148,7 +148,7 @@ TEST(GEMMReference, MultiplyNonSquareSameAsReference)
     ASSERT_EQ(D[11], C[11]);
 }
 
-TEST(GEMMReference, MultiplyLargeSameAsReference)
+TEST(GEMMOpenACC, MultiplyLargeSameAsReference)
 {
     int M = 300, N = 200, K = 100;
     double A[M * K], B[K * N], C[M * N], D[M * N];

@@ -16,14 +16,14 @@ endforeach()
 
 add_library(googletest ${GOOGLETEST_SOURCES})
 
-add_executable(GEMMReference main.cpp reference/gemm.cpp)
-
-target_link_libraries(GEMMReference googletest GLC_LIB pthread)
-
-add_test(NAME GEMMReference COMMAND GEMMReference)
-
 add_executable(GEMMOpenACC main.cpp OpenACC/gemm.cpp)
 
 target_link_libraries(GEMMOpenACC googletest GLC_LIB GLC_OACC_LIB pthread)
 
 add_test(NAME GEMMOpenACC COMMAND GEMMOpenACC)
+
+add_executable(GEMMReference main.cpp reference/gemm.cpp)
+
+target_link_libraries(GEMMReference googletest GLC_LIB pthread)
+
+add_test(NAME GEMMReference COMMAND GEMMReference)

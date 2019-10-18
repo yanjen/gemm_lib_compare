@@ -4,7 +4,7 @@
 
 #include <gemm.hpp>
 
-TEST(GEMMOpenACC, CanMultiply)
+TEST(GEMMReference, CanMultiply)
 {
     double A[9], B[9], C[9];
     int N = 3;
@@ -12,7 +12,7 @@ TEST(GEMMOpenACC, CanMultiply)
     gemm_reference(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
 }
 
-TEST(GEMMOpenACC, CanMultiplyWithValues)
+TEST(GEMMReference, CanMultiplyWithValues)
 {
     double A[9], B[9], C[9]{0};
     int N = 3;
@@ -27,7 +27,7 @@ TEST(GEMMOpenACC, CanMultiplyWithValues)
     gemm_reference(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
 }
 
-TEST(GEMMOpenACC, MultiplyIdentityCorrectly)
+TEST(GEMMReference, MultiplyIdentityCorrectly)
 {
     double A[9], B[9]{0}, C[9]{0};
     int N = 3;
@@ -54,7 +54,7 @@ TEST(GEMMOpenACC, MultiplyIdentityCorrectly)
     ASSERT_EQ(C[8], A[8]);
 }
 
-TEST(GEMMOpenACC, MultiplyCorrectly)
+TEST(GEMMReference, MultiplyCorrectly)
 {
     // clang-format off
 	double A[9] = { 1, 4, 7,
@@ -80,7 +80,7 @@ TEST(GEMMOpenACC, MultiplyCorrectly)
     ASSERT_EQ(C[8], 78);
 }
 
-TEST(GEMMOpenACC, MultiplyCorrectly2)
+TEST(GEMMReference, MultiplyCorrectly2)
 {
     // clang-format off
 	double A[9] = { 1, 4, 7,
@@ -110,7 +110,7 @@ TEST(GEMMOpenACC, MultiplyCorrectly2)
     ASSERT_EQ(C[8], 155);
 }
 
-TEST(GEMMOpenACC, MultiplyNonSquareCorrectly)
+TEST(GEMMReference, MultiplyNonSquareCorrectly)
 {
     // clang-format off
 	double A[6] = {1,4,       // A = |1 4|
