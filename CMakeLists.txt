@@ -10,15 +10,17 @@ set(Openblas_DIR "${Openblas_DIR}" CACHE PATH "Path to OpenBLAS.")
 include_directories ("${PROJECT_SOURCE_DIR}/include")
 include_directories ("${Openblas_DIR}/include")
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11 -acc -Minfo=accel -ta=tesla,cc60 -Mcuda")
 
 add_subdirectory(reference)
+
+add_subdirectory(OpenACC)
 
 link_directories("${Openblas_DIR}/lib")
 
 add_executable(gemm main.cpp)
 
-target_link_libraries(gemm GLC_LIB openblas)
+target_link_libraries(gemm GLC_LIB GLC_OACC_LIB openblas)
 
 include (CTest)
 add_subdirectory(test)
