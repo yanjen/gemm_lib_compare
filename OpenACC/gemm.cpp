@@ -5,13 +5,16 @@ void gemm_OpenACC(int m, int n, int k, double alpha, double *A, int lda,
 {
     // Current version: no leading dimension
     // Row major
+#pragma acc kernels copyin(C [0:m * n])
+#pragma acc loop independent gang
     for (int i = 0; i < m; ++i) {
+#pragma acc loop independent vector
         for (int j = 0; j < n; ++j) {
             C[j * m + i] *= beta;
         }
     }
 
-#pragma acc kernels copyin(A [0:m * k], B [0:k * n]) copy(C [0:m * n])
+#pragma acc kernels copyin(A [0:m * k], B [0:k * n]) copyout(C [0:m * n])
 #pragma acc loop independent gang
     for (int i = 0; i < m; ++i) {
 #pragma acc loop independent vector
