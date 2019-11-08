@@ -1,5 +1,3 @@
-#include <gemm.hpp>
-
 void gemm_OpenMP(int m, int n, int k, double alpha, double *A, int lda,
                  double *B, int ldb, double beta, double *C, int ldc)
 {
