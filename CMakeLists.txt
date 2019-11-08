@@ -12,14 +12,13 @@ set(Openblas_DIR "${Openblas_DIR}" CACHE PATH "Path to OpenBLAS.")
 include_directories ("${PROJECT_SOURCE_DIR}/include")
 include_directories ("${Openblas_DIR}/include")
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11 -mp -Mllvm -acc -Minfo=accel -ta=tesla,cc60 -Mcuda")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
 
 add_subdirectory(reference)
 
-add_subdirectory(OpenACC)
+# add_subdirectory(OpenACC)
 
-ExternalProject_Add(
-    GEMMOpenMP
+ExternalProject_Add(GEMMOpenMP
     PREFIX ${PROJECT_BINARY_DIR}/OpenMP
     SOURCE_DIR ${PROJECT_SOURCE_DIR}/OpenMP
     BINARY_DIR ${PROJECT_BINARY_DIR}/OpenMP
@@ -27,15 +26,30 @@ ExternalProject_Add(
     UPDATE_COMMAND ""
     CMAKE_ARGS
         -DCMAKE_CXX_COMPILER=icpc
-        "-DCMAKE_CXX_FLAGS=-O3 -std=c++11 -fopenmp"
+        "-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS} -fopenmp"
     INSTALL_COMMAND ""
 )
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/OpenMP)
 
+ExternalProject_Add(GEMMOpenACC
+    PREFIX ${PROJECT_BINARY_DIR}/OpenACC
+    SOURCE_DIR ${PROJECT_SOURCE_DIR}/OpenACC
+    BINARY_DIR ${PROJECT_BINARY_DIR}/OpenACC
+    DOWNLOAD_COMMAND ""
+    UPDATE_COMMAND ""
+    CMAKE_ARGS
+        -DCMAKE_CXX_COMPILER=pgc++
+        "-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS} -mp -Mllvm -acc -Minfo=accel -ta=tesla,cc60 -Mcuda"
+    INSTALL_COMMAND ""
+)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/OpenACC)
+
 link_directories("${Openblas_DIR}/lib")
 
+# Any files that links OpenACC function has to be compiled with PGI compiler
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mp -Mllvm -acc -Minfo=accel -ta=tesla,cc60 -Mcuda")
 add_executable(gemm main.cpp)
-
+add_dependencies(gemm GEMMOpenMP GEMMOpenACC)
 target_link_libraries(gemm GLC_LIB GLC_OACC_LIB GLC_OMP_LIB openblas)
 
 include (CTest)
