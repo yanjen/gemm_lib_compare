@@ -11,3 +11,5 @@ target_link_libraries(gemm_OpenACC GLC_OACC_LIB)
 add_custom_command(TARGET gemm_OpenACC
 				   POST_BUILD
 				   COMMAND ${CMAKE_COMMAND} -E copy gemm_OpenACC ${PROJECT_BINARY_DIR}/../)
+
+add_subdirectory(test)

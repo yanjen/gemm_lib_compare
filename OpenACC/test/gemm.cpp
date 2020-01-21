@@ -169,14 +169,14 @@ TEST(GEMMOpenACC, MultiplyLargeSameAsReference)
     gemm_reference(M, N, K, 1.0, A, K, B, N, 1.0, C, N);
     gemm_OpenACC(M, N, K, 1.0, A, K, B, N, 1.0, D, N);
 
-    ASSERT_EQ(D[0], C[0]);
-    ASSERT_EQ(D[5852], C[5852]);
-    ASSERT_EQ(D[7619], C[7619]);
-    ASSERT_EQ(D[16709], C[16709]);
-    ASSERT_EQ(D[32812], C[32812]);
-    ASSERT_EQ(D[37941], C[37941]);
-    ASSERT_EQ(D[54347], C[54347]);
-    ASSERT_EQ(D[54802], C[54802]);
-    ASSERT_EQ(D[57450], C[57450]);
-    ASSERT_EQ(D[59999], C[59999]);
+    ASSERT_NEAR(D[0], C[0], 1e-14);
+    ASSERT_NEAR(D[5852], C[5852], 1e-14);
+    ASSERT_NEAR(D[7619], C[7619], 1e-14);
+    ASSERT_NEAR(D[16709], C[16709], 1e-14);
+    ASSERT_NEAR(D[32812], C[32812], 1e-14);
+    ASSERT_NEAR(D[37941], C[37941], 1e-14);
+    ASSERT_NEAR(D[54347], C[54347], 1e-14);
+    ASSERT_NEAR(D[54802], C[54802], 1e-14);
+    ASSERT_NEAR(D[57450], C[57450], 1e-14);
+    ASSERT_NEAR(D[59999], C[59999], 1e-14);
 }
