@@ -1,10 +1,10 @@
 add_library(GLC_LIB gemm.cpp)
 
-link_directories("${Openblas_DIR}/lib")
+set (CMAKE_CXX_FLAGS "-O3 -std=c++11 -mkl=parallel")
 
 add_executable(gemm_reference main_reference.cpp)
 
-target_link_libraries(gemm_reference GLC_LIB openblas)
+target_link_libraries(gemm_reference GLC_LIB)
 
 add_custom_command(TARGET gemm_reference
 				   POST_BUILD

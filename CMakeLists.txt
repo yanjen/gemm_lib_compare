@@ -7,10 +7,7 @@ set (GLC_VERSION_PATCH 0)
 
 include (ExternalProject)
 
-set(Openblas_DIR "${Openblas_DIR}" CACHE PATH "Path to OpenBLAS.")
-
 include_directories ("${PROJECT_SOURCE_DIR}/include")
-include_directories ("${Openblas_DIR}/include")
 
 set (CMAKE_CXX_COMPILER icpc)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
