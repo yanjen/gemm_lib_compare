@@ -31,4 +31,15 @@ void OpenMP_timing(int N, double *A, double *B, double *C)
                   end_time.tv_usec - start_time.tv_usec) /
                      1.e6
               << std::endl;
+
+
+    gettimeofday(&start_time, NULL);
+    gemm_OpenMP2(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
+    gettimeofday(&end_time, NULL);
+
+    std::cout << "Elapse time for Matrix-Matrix multiplication (OpenMP2) is "
+              << ((end_time.tv_sec - start_time.tv_sec) * 1000000u +
+                  end_time.tv_usec - start_time.tv_usec) /
+                     1.e6
+              << std::endl;
 }
