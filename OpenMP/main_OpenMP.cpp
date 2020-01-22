@@ -23,6 +23,7 @@ void OpenMP_timing(int N, double *A, double *B, double *C)
     struct timeval start_time, end_time;
 
     gettimeofday(&start_time, NULL);
+    // Regular OpenMP
     gemm_OpenMP(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
     gettimeofday(&end_time, NULL);
 
@@ -32,8 +33,8 @@ void OpenMP_timing(int N, double *A, double *B, double *C)
                      1.e6
               << std::endl;
 
-
     gettimeofday(&start_time, NULL);
+    // OpenMP with array reduction
     gemm_OpenMP2(N, N, N, 1.0, A, N, B, N, 0.0, C, N);
     gettimeofday(&end_time, NULL);
 
