@@ -19,19 +19,23 @@ Run the following command to compile the project
 ```
 mkdir build
 cd build
-cmake -D CMAKE_C_COMPILER="/path/to/your/pgi/compiler/pgc++" ..
+cmake ..
 make
 ```
 
 ## Running the tests
-After Compiling, run the following command.
+As the executable files are compiled with multiple compilers, we separate the tests into multiple executable files as well. To test the gemm accuracy, run the following tests after compiling.
 ```
-make test
+./GEMMReferenceTest
+./GEMMOpenMPTest
+./GEMMOpenACCTest
 ```
 Seperate tests are under the directory `test/`.
 
 ## Running speed compare
 After Compiling, run the following command.
 ```
-./gemm
+./gemm_reference
+./gemm_OpenMP
+./gemm_OpenACC
 ```
