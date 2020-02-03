@@ -1,9 +1,9 @@
 enable_language(CUDA)
 
-add_library(GLC_CUDA_LIB gemm.cu)
+set (CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Xcompiler -Wno-deprecated-gpu-targets")
+set (CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -arch=sm_60 -D_FORCE_INLINES")
 
-set (CUDA_NVCC_FLAGS -Xcompiler;-Wall,-Wextra;-Wno-deprecated-gpu-targets)
-set (CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} -arch=sm_60;-D_FORCE_INLINES)
+add_library(GLC_CUDA_LIB gemm.cu)
 
 add_executable(gemm_CUDA main_CUDA.cu)
 
