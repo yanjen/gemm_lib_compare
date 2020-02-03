@@ -4,7 +4,8 @@
 
 #include <gemm.hpp>
 
-void OpenMP_timing(int N, double *A, double *B, double *C);
+void OpenMP_timing1(int N, double *A, double *B, double *C);
+void OpenMP_timing2(int N, double *A, double *B, double *C);
 
 int main(int argc, char const *argv[])
 {
@@ -13,12 +14,14 @@ int main(int argc, char const *argv[])
     B = new double[matrix_size * matrix_size]();
     C = new double[matrix_size * matrix_size]();
 
-    OpenMP_timing(matrix_size, A, B, C);
+    OpenMP_timing1(matrix_size, A, B, C);
+
+    // OpenMP_timing2(matrix_size, A, B, C);
 
     return 0;
 }
 
-void OpenMP_timing(int N, double *A, double *B, double *C)
+void OpenMP_timing1(int N, double *A, double *B, double *C)
 {
     struct timeval start_time, end_time;
 
@@ -32,6 +35,11 @@ void OpenMP_timing(int N, double *A, double *B, double *C)
                   end_time.tv_usec - start_time.tv_usec) /
                      1.e6
               << std::endl;
+}
+
+void OpenMP_timing2(int N, double *A, double *B, double *C)
+{
+    struct timeval start_time, end_time;
 
     gettimeofday(&start_time, NULL);
     // OpenMP with array reduction
