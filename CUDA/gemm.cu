@@ -1,3 +1,5 @@
+#include <cuda_runtime.h>
+
 #include <gemm.hpp>
 
 void gemm_CUDA(int m, int n, int k, double alpha, double *A, int lda,
