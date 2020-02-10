@@ -7,7 +7,7 @@ void gemm_reference(int m, int n, int k, double alpha, double *A, int lda,
     // Row major
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
-            C[j * m + i] *= beta;
+            C[i * n + j] *= beta;
         }
     }
 

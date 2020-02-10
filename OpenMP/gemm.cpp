@@ -8,7 +8,7 @@ void gemm_OpenMP(int m, int n, int k, double alpha, double *A, int lda,
 #pragma omp parallel for collapse(2)
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
-            C[j * m + i] *= beta;
+            C[i * n + j] *= beta;
         }
     }
 
@@ -30,7 +30,7 @@ void gemm_OpenMP2(int m, int n, int k, double alpha, double *A, int lda,
 #pragma omp parallel for collapse(2)
     for (int i = 0; i < m; ++i) {
         for (int j = 0; j < n; ++j) {
-            C[j * m + i] *= beta;
+            C[i * n + j] *= beta;
         }
     }
 
