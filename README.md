@@ -1,13 +1,14 @@
-# GPU_lib_compare
-This repository compares the runtime performance of CUDA, OpenACC, and OpenMP on GPU with several applications.
+# gemm_lib_compare
+This repository compares the runtime performance of gemm with BLAS, OpenMP, OpenACC, and CUDA.
 
 ## Getting Started
 
 ### Prerequisities
 The following packages are required to compile this project.
 
-- __PGI C++ compiler__ (>18.1)
-- __NVIDIA CUDA compiler__
+- __Intel C/C++ compiler__ (with MKL support)
+- __PGI C/C++ compiler__ (>18.1)
+- __NVIDIA CUDA compiler__ (>9.0)
 - __CMake__ (>3.10)
 
 __Note that the project has to be run on a mechine with NVIDIA GPU__
@@ -19,7 +20,7 @@ Run the following command to compile the project
 ```
 mkdir build
 cd build
-cmake ..
+cmake -D CMAKE_CXX_COMPILER=icpc ..
 make
 ```
 
@@ -38,4 +39,5 @@ After Compiling, run the following command.
 ./gemm_reference
 ./gemm_OpenMP
 ./gemm_OpenACC
+./gemm_CUDA
 ```
